@@ -1,63 +1,75 @@
+"use strict"
 
-"use strict";
-
-
-
-const ventas = [
-  { producto: "Televisor", categoria: "Electronica", monto: 1200 },
-  { producto: "Laptop", categoria: "Electronica", monto: 1500 },
-  { producto: "Camisa", categoria: "Ropa", monto: 500 },
-  { producto: "Pantalón", categoria: "Ropa", monto: 750 },
-  { producto: "Auriculares", categoria: "Electronica", monto: 800 },
-  { producto: "Pizza", categoria: "Comida", monto: 400 }
+const estudiantes = [
+  {
+    nombre: "Javier",
+    calificaciones: {
+      matematicas: 8,
+      historia: 9,
+      biologia: 7
+    }
+  },
+  {
+    nombre: "Karla",
+    calificaciones: {
+      matematicas: 10,
+      historia: 7,
+      biologia: 8
+    }
+  },
+  {
+    nombre: "Yoel",
+    calificaciones: {
+      matematicas: 6,
+      historia: 6,
+      biologia: 9
+    }
+  }
 ];
 
-const ventasV1 = ventas.reduce((pvalue, cvalue) => {
+console.log("Mostrar los nombres de los estudiantes")
 
-  if (!pvalue[cvalue.categoria]) {
-    pvalue[cvalue.categoria] = { total: 0, cantidadDeVentas: 0 }
+for (const estudiante of estudiantes) {
+  console.log(estudiante.nombre)
+}
+
+
+console.log("Mostrá el nombre de cada estudiante y la nota de biología")
+
+for (const estudiante of estudiantes) {
+  console.log(estudiante.nombre)
+  console.log(estudiante.calificaciones.biologia)
+}
+
+console.log("Por cada estudiante, mostrá todas las materias con sus respectivas notas")
+
+for (const estudiante of estudiantes) {
+  console.log(estudiante.calificaciones)
+}
+
+console.log("Calculá cuántas materias hay en total entre todos los estudiantes (sin repetir estudiantes, ni materias mal contadas).")
+
+let totalMaterias = 0;
+for (const estudiante of estudiantes) {
+  for (const i in estudiante.calificaciones) {
+    totalMaterias++
   }
-  pvalue[cvalue.categoria].total += cvalue.monto;
-  pvalue[cvalue.categoria].cantidadDeVentas++;
+}
+console.log(totalMaterias)
 
-  return pvalue
-}, {})
-console.log(ventasV1);
+console.log("Mostrá la suma total de todas las notas entre todos los estudiantes")
 
-console.log("************************************************");
-
-const calificaciones = [
-  { nombre: "Ana", nota: 8.5 },
-  { nombre: "Luis", nota: 6.3 },
-  { nombre: "Marta", nota: 9.1 },
-  { nombre: "Pedro", nota: 5.4 },
-  { nombre: "Lucía", nota: 7.8 }
-];
-
-const respuesta = calificaciones.reduce((pvalue, cvalue, i, array) => {
-  pvalue.sumaNotas += cvalue.nota;
-  if (i == array.length - 1) {
-    pvalue.promedio = pvalue.sumaNotas / array.length
-  }
-  if (pvalue.mejor == 0 || pvalue.mejor < cvalue.nota) pvalue.mejor = cvalue.nota
-  if (pvalue.peor == 0 || pvalue.peor > cvalue.nota) pvalue.peor = cvalue.nota;
-  return pvalue
-}, { sumaNotas: 0, mejor: 0, peor: 0, promedio: 0 });
-
-console.log(respuesta);
-
-console.log("************************************************");
-
-function constructorObject (nombre, edad, sexo) {
-  this.nombre = nombre;
-  this.edad = parseFloat(edad);
-  this.sexo = sexo;
-};
-
-const persona1 = new constructorObject("Javier", 31, "Masculino");
-
-persona1.color = "Blanco"
+let sumaNotas = 0;
+for (const estudiante of estudiantes) {
+  sumaNotas += estudiante.calificaciones.biologia + estudiante.calificaciones.historia + estudiante.calificaciones.matematicas
+}
 
 
-console.log(persona1);
+console.log(sumaNotas / estudiantes.length);
+
+console.log("Calculá cuántas materias hay en total entre todos los estudiantes (sin repetir estudiantes, ni materias mal contadas).")
+
+for (const i in estudiantes) {
+  console.log(estudiantes[0].calificaciones)
+}
 
